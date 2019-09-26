@@ -6,6 +6,7 @@
     public partial class sortingForm : Form
     {
         int[] integerArray = new int[10];    //Variable to hold the array of integers to be sorted
+        Random rng = new Random();           //Random number generator for the New List and Shuffle buttons
 
         public sortingForm()
         {
@@ -15,8 +16,6 @@
         //Button allowing the user to generate a new list of 10 random integers
         private void NewListClick(object sender, EventArgs e)
         {
-            Random rng = new Random();
-
             //Clear the current display for new numbers
             listDisplay.Clear();
             
@@ -152,5 +151,29 @@
             return pIndex;
         }
 
+        //Perform a shuffle on the current integerArray so the same array can be sorted again. (Knuth Shuffle)
+        private void ShuffleButtonClick(object sender, EventArgs e)
+        {
+            int n = integerArray.Length;
+            while (n > 1)
+            {
+                //Choose value up to n, then deincrement n
+                int k = rng.Next(n--);
+                //Let temp be the last unshuffled value
+                int temp = integerArray[n];
+                //Let the last unshuffled value equal the random value at index k
+                integerArray[n] = integerArray[k];
+                //Assign the overwritten value
+                integerArray[k] = temp;
+            }
+
+            //Clear display and redisplay the list after shuffling
+            listDisplay.Clear();
+            for (int k = 0; k < 10; k++)
+            {
+                listDisplay.Text += (k < 9) ? $"{integerArray[k]}, " : $"{integerArray[k]}";
+            }
+
+        }
     }
 }

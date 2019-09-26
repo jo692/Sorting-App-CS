@@ -36,6 +36,7 @@
             this.selectionSortButton = new System.Windows.Forms.Button();
             this.mergeSortButton = new System.Windows.Forms.Button();
             this.quickSortButton = new System.Windows.Forms.Button();
+            this.shuffleButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listDisplay
@@ -50,7 +51,7 @@
             // newListButton
             // 
             this.newListButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.newListButton.Location = new System.Drawing.Point(205, 73);
+            this.newListButton.Location = new System.Drawing.Point(17, 73);
             this.newListButton.Name = "newListButton";
             this.newListButton.Size = new System.Drawing.Size(124, 30);
             this.newListButton.TabIndex = 1;
@@ -116,11 +117,23 @@
             this.quickSortButton.UseVisualStyleBackColor = false;
             this.quickSortButton.Click += new System.EventHandler(this.QuickSortButtonClick);
             // 
+            // shuffleButton
+            // 
+            this.shuffleButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.shuffleButton.Location = new System.Drawing.Point(411, 73);
+            this.shuffleButton.Name = "shuffleButton";
+            this.shuffleButton.Size = new System.Drawing.Size(124, 30);
+            this.shuffleButton.TabIndex = 7;
+            this.shuffleButton.Text = "Shuffle";
+            this.shuffleButton.UseVisualStyleBackColor = true;
+            this.shuffleButton.Click += new System.EventHandler(this.ShuffleButtonClick);
+            // 
             // sortingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(552, 233);
+            this.Controls.Add(this.shuffleButton);
             this.Controls.Add(this.quickSortButton);
             this.Controls.Add(this.mergeSortButton);
             this.Controls.Add(this.selectionSortButton);
@@ -148,6 +161,7 @@
         private System.Windows.Forms.Button selectionSortButton;
         private System.Windows.Forms.Button mergeSortButton;
         private System.Windows.Forms.Button quickSortButton;
+        private System.Windows.Forms.Button shuffleButton;
     }
 }
 
