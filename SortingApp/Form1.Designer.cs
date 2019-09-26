@@ -102,6 +102,7 @@
             this.mergeSortButton.TabIndex = 5;
             this.mergeSortButton.Text = "Merge";
             this.mergeSortButton.UseVisualStyleBackColor = false;
+            this.mergeSortButton.Click += new System.EventHandler(this.MergeSortButtonClick);
             // 
             // quickSortButton
             // 
@@ -113,6 +114,7 @@
             this.quickSortButton.TabIndex = 6;
             this.quickSortButton.Text = "Quick";
             this.quickSortButton.UseVisualStyleBackColor = false;
+            this.quickSortButton.Click += new System.EventHandler(this.QuickSortButtonClick);
             // 
             // sortingForm
             // 
