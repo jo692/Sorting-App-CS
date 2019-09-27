@@ -1,6 +1,8 @@
 ﻿namespace SortingApp
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading;
     using System.Windows.Forms;
     public partial class sortingForm : Form
@@ -91,9 +93,91 @@
             currentOperationLabel.Text = "";
         }
 
+        //Perform the mergesort algorithm, updating the display with each merge 
         private void MergeSortButtonClick(object sender, EventArgs e)
         {
-            
+            //Set the label
+            currentOperationLabel.Text = "MergeSort in progress...";
+            currentOperationLabel.Refresh();
+
+            //Merge functions take and return List<int> so need to cast before and after the algorithm
+            List<int> sortedList = MergeSort(integerArray.ToList());
+            integerArray = sortedList.ToArray();
+
+            //Clear the label
+            currentOperationLabel.Text = "";
+
+        }
+
+        //Recursive algorithm to sort the array by splitting the problem into manageable chunks
+        public List<int> MergeSort(List<int> arr)
+        {
+            if (arr.Count <= 1)
+            {
+                return arr;
+            }
+
+            List<int> left = new List<int>();
+            List<int> right = new List<int>();
+
+            int middle = arr.Count / 2;
+
+            for (int i = 0; i < middle; i++)
+            {
+                left.Add(arr[i]);
+            }
+            for (int j = middle; j < arr.Count; j++)
+            {
+                right.Add(arr[j]);
+            }
+
+            left = MergeSort(left);
+            right = MergeSort(right);
+            return Merge(left, right);
+        }
+
+        //Combines two SORTED lists into one SORTED list
+        public List<int> Merge(List<int> left, List<int> right)
+        {
+            List<int> c = new List<int>();
+            //Run until both lists are empty
+            while (left.Count > 0 || right.Count > 0)
+            {
+                if (left.Count > 0 && right.Count > 0)
+                {
+                    //Sort them until one is empty
+                    if (left.First() <= right.First())
+                    {
+                        c.Add(left.First());
+                        left.Remove(left.First());
+                    }
+                    else
+                    {
+                        c.Add(right.First());
+                        right.Remove(right.First());
+                    }
+                }
+                //Add any remaining elements
+                else if (left.Count > 0)
+                {
+                    c.Add(left.First());
+                    left.Remove(left.First());
+                }
+                else if (right.Count > 0)
+                {
+                    c.Add(right.First());
+                    right.Remove(right.First());
+                }
+            }
+            //Clear display and redisplay the list after each merge
+            listDisplay.Clear();
+            for (int k = 0; k < c.Count; k++)
+            {
+                listDisplay.Text += (k < c.Count - 1) ? $"{c[k]}, " : $"{c[k]}";
+            }
+            Thread.Sleep(500);
+            listDisplay.Refresh();
+            return c;
         }
 
         //Perform the quicksort algorithm on the integerArray, would like to possibly highlight the pivot in another colour each time?
@@ -139,7 +223,7 @@
             //Swap pivot with pIndex so pivot is in sorted position
             Tools.SwapValues(ref nums[pIndex], ref nums[high]);
 
-            //Clear display and redisplay the list after each pass
+            //Clear display and redisplay the list after partition
             listDisplay.Clear();
             for (int k = 0; k < 10; k++)
             {
